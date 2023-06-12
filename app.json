@@ -15,16 +15,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wilson112001.goWeather"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+       
+     
+      },
+      "softwareKeyboardLayoutMode" : "pan",
+      "package": "com.wilson112001.goWeather"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2e9b748e-19bb-4939-9ca9-7e4be841f9a4"
+      }
     }
   }
 }
