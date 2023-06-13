@@ -3,13 +3,16 @@ import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { themes } from '../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
 
 const InfoCard = ({icon, property, title, color}) => {
+
+  
   return (
     <View style={[styles.container]}>
       {icon}
-      <Text style={{color: color, fontWeight: 'bold', fontSize: 20}}>{property}</Text>
-      <Text style={{color: color, fontSize: 16}}>{title}</Text>
+      <Text style={{color: color, fontSize: 18, fontFamily:"Domine-Bold"}}>{property}</Text>
+      <Text style={{color: color, fontSize: 14, fontFamily: 'Domine'}}>{title}</Text>
     </View>
   )
 }

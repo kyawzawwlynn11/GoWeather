@@ -16,7 +16,7 @@ const Date = ({date}) => {
 
 
  <View style={styles.date}>
-    <Text style={{color:'#faf9f6', fontWeight: 'bold'}}>{dateTime}</Text>
+    <Text style={{color:'#faf9f6', fontFamily:'Domine-Bold', fontSize: 13}}>{dateTime}</Text>
 </View>
   )
 }
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#faf9f6',
         height: 30,
-        width: 200,
+        width: 190,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,

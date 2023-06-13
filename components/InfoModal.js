@@ -19,7 +19,7 @@ const InfoModal = ({data, visible, setVisible}) => {
 
       <View style={styles.modalContainer}>
          <Pressable style={styles.header} onPress={() => setVisible(false)}> 
-           <Text style={{color: 'white', fontSize: 25}}>Details</Text>
+           <Text style={{color: 'white', fontSize: 20, fontFamily: 'Domine-Bold'}}>Details</Text>
            <EvilIcons name="close-o" size={28} color="white" style={{position: 'absolute', right: 20}}/>
          </Pressable>
          

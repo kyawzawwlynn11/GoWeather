@@ -14,6 +14,8 @@ import Date from '../components/Date';
 import MainScreenHeader from '../components/MainScreenHeader';
 import { LocationContext } from '../constants/LocationContext';
 import moment from 'moment';
+import { Feather } from '@expo/vector-icons';
+
 
 
 
@@ -185,7 +187,7 @@ const MainScreen = ({navigation}) => {
     const contents = {
         theme:{
           wind: {
-            icon: <MaterialCommunityIcons name="waves" size={40} color={'#faf9f6'} />,
+            icon:  <Feather name="wind" size={40} color="#faf9f6" />,
             color:  '#faf9f6', //Weatherdata.weather[0].main === 'Clouds' ? themes.cloudy : Weatherdata.weather[0].main === 'Clear' ? themes.sunny : themes.rain,
             property:  Weatherdata.wind.speed.toFixed(1) + ' km/h',
             title: "Wind"
@@ -242,7 +244,7 @@ const MainScreen = ({navigation}) => {
                 //  Weatherdata.weather[0].main === 'Clear' && {backgroundColor: themes.sunny},
                 //  Weatherdata.weather[0].main === 'Rain' && {backgroundColor: themes.rain}
                 ]}>
-                <Text style={{color: '#faf9f6', fontWeight: 'bold', fontSize: 20}}>{Weatherdata.weather[0].main === 'Clouds' ? 'Cloudy': Weatherdata.weather[0].main === 'Clear' ? 'Clear' : 'Rainy'}</Text>
+                <Text style={{color: '#faf9f6', fontFamily:'Domine-Bold', fontSize: 19}}>{Weatherdata.weather[0].main === 'Clouds' ? 'Cloudy': Weatherdata.weather[0].main === 'Clear' ? 'Clear' : 'Rainy'}</Text>
             </View>
             <View style={[
                 styles.temperature,
@@ -273,12 +275,12 @@ const MainScreen = ({navigation}) => {
         >  
          <InfoModal data={Weatherdata} visible={visible} setVisible={setVisible}/>
 
-          <Text style={{color: '#faf9f6', fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>Daily Summary</Text>
-          <Text style={height <= 750 ? {color: '#faf9f6', fontSize: 15} : {color: '#faf9f6', fontSize: 18}}>
+          <Text style={{color: '#faf9f6', fontSize: 18, marginVertical: 10, fontFamily:'Domine-Bold'}}>Daily Summary</Text>
+          <Text style={height <= 750 ? {color: '#faf9f6', fontSize: 14, fontFamily: 'Domine'} : {color: '#faf9f6', fontSize: 16,fontFamily:'Domine'}}>
             Now, it feels like {Math.round(Weatherdata.main.feels_like -  273.15)}°C.
             The actual temperature is {Math.round(Weatherdata.main.temp -  273.15)}°C,
             The temperature is felt between {Math.round(Weatherdata.main.temp_min - 273.15)}°C and {Math.round(Weatherdata.main.temp_max-273.15)}°C.
-            The sky condition in {Weatherdata.name} is best described as '{Weatherdata.weather[0].description}'.
+            The weather condition in {Weatherdata.name} is best described as '{Weatherdata.weather[0].description}'.
           </Text>
           </View>
           <Pressable  onPress={()=>setVisible(true)}  style={styles.info}>
@@ -300,7 +302,7 @@ const MainScreen = ({navigation}) => {
                 // Weatherdata.weather[0].main === 'Clear' && {backgroundColor: themes.sunny},
                 // Weatherdata.weather[0].main === 'Rain' && {backgroundColor: themes.rain}s
                 ]}>
-             <Text style={{fontSize: 20, fontWeight: 'bold', color: '#faf9f6'}}>5-day forecast</Text>
+             <Text style={{fontSize: 18, fontFamily: 'Domine-Bold', color: '#faf9f6'}}>5-day forecast</Text>
              <FontAwesome name="long-arrow-right" size={30} color="white" />
             </Pressable>
             <View style={styles.forecastContainer}>
@@ -382,7 +384,7 @@ const styles = StyleSheet.create({
         height : '45%',
         borderRadius: 10,
         flexDirection: 'row',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: 'white'
         
     },

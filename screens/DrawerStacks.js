@@ -78,7 +78,6 @@ export default function DrawerStacks({navigation}) {
     <Context.Provider value={data}>
       <LocationContext.Provider value={{location: location, setLocation: setLocation, pressHandler: pressHandler}}>
        <Drawer.Navigator initialRouteName='Home' drawerContent={props => <Sidemenu {...props} />}  screenOptions={{headerShown: false}}>
-       <Drawer.Screen name='Error' component={LocationError} />
         <Drawer.Screen name='Home' component={Home} /> 
         <Drawer.Screen name='About' component={About} />
         <Drawer.Screen name='Change Location' component={ChangeLocation} />

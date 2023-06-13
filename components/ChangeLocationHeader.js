@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
         //backgroundColor:'white'
     },
     firstView:{
-      width: '40%',
+      width: '80%',
       height: '40%',
       borderBottomWidth: 5,
       borderBottomColor: 'white'
     },
     secondView:{
-      width: '80%',
+      width: '40%',
       height: '40%',
       borderTopWidth: 5,
       borderTopColor: 'white'

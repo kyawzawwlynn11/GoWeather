@@ -6,8 +6,13 @@ import ChangeLocationHeader from '../components/ChangeLocationHeader';
 import CustomButton from '../components/CustomButton';
 import { cities } from '../constants/citydata';
 import LocationTag from '../components/LocationTag';
+import { useFonts } from 'expo-font';
 
 const ChangeLocation = ({navigation}) => {
+
+   const [fontsLoaded] = useFonts ({
+    'Ledger': require('../assets/fonts/Ledger-Regular.ttf')
+   })
    //Registering the highest level component state and its state setter function using useContext hook
    const {location,pressHandler} = useContext(LocationContext);
 
@@ -21,15 +26,19 @@ const ChangeLocation = ({navigation}) => {
    const iconPresshandler = () => {
     navigation.toggleDrawer()
 
+   
 
+   }
 
+   if(!fontsLoaded){
+    return null
    }
   return (
     <View style={styles.container}>
       <ChangeLocationHeader iconPresshandler={iconPresshandler}/>
       <View style={styles.firstSection}>
         <View style={styles.wrapper}>
-           <Text style={{fontSize:24, fontWeight: 'bold', color: '#393E46'}}>Search your city</Text>
+           <Text style={{fontSize:19, color: '#393E46', fontFamily: 'Domine-Bold'}}>Search your city</Text>
            <View style={styles.searchContainer}>
               <TextInput placeholder='Search' onChangeText={(e) => setText(e)} style={{width: '70%', height:'100%',backgroundColor: 'white', borderRadius: 10, color: '#393E46', paddingLeft:20}}/>
                <CustomButton width={'25%'} title={'Change'} backgroundColor={'#393E46'} color={'white'} borderRadius={10} onPress={pressHandler} value={text} goBackHandler={goBackHandler}/>
@@ -39,7 +48,7 @@ const ChangeLocation = ({navigation}) => {
       </View>
       <View style={styles.secondSection}>
          <View style={styles.titleContainer}>
-              <Text style={{fontSize:20, fontWeight:'bold', color:'#393E46'}}>Popular City Tags</Text>
+              <Text style={{fontSize:19, color:'#393E46', fontFamily:"Domine-Bold"}}>Popular Location Tags</Text>
          </View>
          <View style={styles.contentContainer}>
            {cities.map(city => {
@@ -51,7 +60,7 @@ const ChangeLocation = ({navigation}) => {
       </View>
       <View style={styles.thirdSection}>
        <View style={styles.textview}>
-       <Text style={{fontSize:12, color:'#393E46'}}>*Please note that there may be some districts, areas or townships that are not available. We recommend you to try the major cities.</Text>
+       <Text style={{fontSize:12, color:'#393E46',fontFamily:"Domine"}}>*Please note that there may be some districts, areas or townships that are not available. We recommend you to try the major cities.</Text>
        </View>
       </View>
      

@@ -15,7 +15,7 @@ const AboutScreenHeader = ({iconPresshandler}) => {
        </Pressable>
     </View>
     <View style={styles.middleSection}>
-     <Text style={{color:'#F9F3F3', fontSize: 18, fontWeight: 'bold'}}>About</Text>
+     <Text style={{color:'#F9F3F3', fontSize: 18, fontFamily: 'Domine-Bold'}}>About</Text>
    </View>
    <View style={styles.rightSection}>
   

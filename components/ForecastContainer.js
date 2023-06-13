@@ -166,7 +166,7 @@ const getIcons = (arr) => {
     <View style={styles.container}>
         
       <View style={styles.header}>
-       <Text style={{fontSize: 20, fontWeight: 'bold', color: '#393E46'}}>{text}</Text>
+       <Text style={{fontSize: 20, fontFamily: "Domine-Bold", color: '#393E46'}}>{text}</Text>
       </View>
         <BarChart
     data={{
@@ -190,6 +190,7 @@ const getIcons = (arr) => {
       decimalPlaces: 0, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(57, 62, 70, ${opacity})`,
+      
       style: {
         borderRadius: 16,
       },
@@ -218,8 +219,8 @@ const getIcons = (arr) => {
         <View style={styles.contents}>
           
           <Image style={{width: 100, height: 90}} source={{uri : `https://openweathermap.org/img/wn/${item.icon}.png`}}/>
-          <Text style={{fontSize:13,color: '#393E46' }}>{item.title}</Text>
-          <Text style={{fontSize: 15, fontWeight: 500, color: '#393E46' }}>{item.date}</Text>
+          <Text style={{fontSize:13, fontFamily: 'Domine' }}>{item.title}</Text>
+          <Text style={{fontSize: 15, color: '#393E46' , fontFamily: 'Domine-Bold'}}>{item.date}</Text>
          
           
         </View>

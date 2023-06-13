@@ -15,7 +15,7 @@ const MainScreenHeader = ({name, navigation, iconPresshandler}) => {
         </Pressable>
      </View>
      <View style={styles.middleSection}>
-      <Text style={{color:'white', fontSize: 20, fontWeight: 'bold'}}>{name}</Text>
+      <Text style={{color:'white', fontSize: 18, fontFamily: 'Domine-Bold'}}>{name}</Text>
     </View>
     <View style={styles.rightSection}>
 
@@ -49,13 +49,13 @@ iconView:{
   marginLeft: 10
 },
 firstView:{
-  width: '40%',
+  width: '80%',
   height: '40%',
   borderBottomWidth: 5,
   borderBottomColor: 'white'
 },
 secondView:{
-  width: '80%',
+  width: '40%',
   height: '40%',
   borderTopWidth: 5,
   borderTopColor: 'white'

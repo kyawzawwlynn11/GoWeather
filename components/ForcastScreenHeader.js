@@ -12,7 +12,7 @@ const ForcastScreenHeader = ({pressHandler}) => {
         </Pressable>
      </View>
      <View style={styles.middleSection}>
-      <Text style={{color:'#F9F3F3', fontSize: 18, fontWeight: 'bold'}}>5 day forcast</Text>
+      <Text style={{color:'#F9F3F3', fontSize: 18, fontFamily: 'Domine-Bold'}}>5-day forcast</Text>
     </View>
     <View style={styles.rightSection}>
 
