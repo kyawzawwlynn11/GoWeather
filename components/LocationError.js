@@ -1,16 +1,41 @@
-import { StyleSheet, Text, View,Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View,Image, Dimensions, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 import CustomButton from './CustomButton'
+import { AntDesign } from '@expo/vector-icons';
 
-const LocationError = () => {
+const LocationError = ({navigation}) => {
+
+  const pressHandler=() => {
+    navigation.navigate('Change Location');
+  }
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/confused.png')} style={{width:Dimensions.get('window').width*0.9, height:Dimensions.get('window').height*0.5,marginVertical:10}} />
-      <View >
-      <Text >Hmm... it looks like the location you have entered is </Text>
-      <Text>unavailable or there is a typo in your search.</Text>
+       
+        <TouchableOpacity style={{ position: 'absolute',top:5, right: 5,alignSelf:'flex-end'}}>
+         <AntDesign name="closecircle" size={24} color="#393E46"  />
+         </TouchableOpacity>
+      <View style={styles.wrapper}>
+        <View style={styles.imageView}>
+       
+           <Image 
+           source={require('../assets/confused.png')}
+           style={{
+            width: '100%',
+            height: '100%'
+           }}
+           />
+        </View>
+        <View style={styles.textView}>
+          
+            <Text style={{fontFamily: 'Domine', lineHeight: 20}}>Hmm...It looks like the location you are searching for is not available or there is a typo in your search</Text>
+        </View>
+        <View style={{flex: 0.1, backgroundColor: 'red', justifyContent:'center', alignItems:'center'}}>
+        <CustomButton width={'30%'} title={'Retry'} backgroundColor={'#393E46'} color={'white'} borderRadius={10}  height={'70%'} onPress={pressHandler} goBackHandler={() => console.log('Go back handler not in action')}/>
+        </View>
       </View>
-      <CustomButton width={100} title={'Retry'} backgroundColor={'#393E46'} color={'white'} borderRadius={10}  height={40}/>
+      <StatusBar />
+ 
+      
     </View>
   )
 }
@@ -18,12 +43,26 @@ const LocationError = () => {
 export default LocationError
 
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor:'#fff',
-        justifyContent:'center',
-        alignItems:'center',
-        gap:30
+  container: {
+    flex:1,
+    backgroundColor:'#fff',
+    justifyContent:'center',
+    alignItems:'center'
+},
+wrapper: {
+    flex: 0.7,
+    //backgroundColor:'red',
+    width: Dimensions.get('window').width-40
+},
+imageView: {
+    flex:0.7
+},
+textView: {
+    flex: 0.2,
+    justifyContent:'center',
+    alignItems:'center',width: '85%', //backgroundColor:'red',
+    alignSelf:'center',
     
-    }
+}
 })
+//

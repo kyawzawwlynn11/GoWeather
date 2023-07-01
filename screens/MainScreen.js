@@ -7,12 +7,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import ForecastCard from '../components/ForecastCard';
 import Loading from '../components/Loading';
-import { Context } from './DrawerStacks';
+import { Context } from '../constants/Context';
 import InfoModal from '../components/InfoModal';
 import { Video,ResizeMode } from 'expo-av';
 import Date from '../components/Date';
 import MainScreenHeader from '../components/MainScreenHeader';
-import { LocationContext } from '../constants/LocationContext';
+import { LocationContext } from '../constants/Context';
 import moment from 'moment';
 import { Feather } from '@expo/vector-icons';
 
@@ -20,6 +20,7 @@ import { Feather } from '@expo/vector-icons';
 
 
 
+let render = 0
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -28,7 +29,7 @@ const height = Dimensions.get('window').height;
 
 
 const MainScreen = ({navigation}) => {
-
+    
 
     const Weatherdata =  useContext(Context);
 
@@ -48,14 +49,7 @@ const MainScreen = ({navigation}) => {
      
   
     useEffect(() => {
-        const fetchForecastData = () => {
-            const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=795a1cddd32720de41ea778679b40c73`
-            fetch(url).then(response => response.json()).then(res => {
-                //console.log(forecastData)
-                setForecastData(res)
-                
-            })
-        }
+      
      getWeatherCondition(Weatherdata)
      fetchForecastData()
      //console.log(moment.unix(Weatherdata.dt).utc().add(Weatherdata.timezone,'s').format('H:mm:ss:a')) //correct local time
@@ -66,6 +60,23 @@ const MainScreen = ({navigation}) => {
      console.log(condition)
     // console.log(Weatherdata)
     },[location,Weatherdata])
+
+
+    const fetchForecastData = () => {
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=795a1cddd32720de41ea778679b40c73`
+      fetch(url).then(response => response.json()).then(res => {
+          //console.log(forecastData)
+          console.log("foRECAST DATA FETCHED")
+          console.log(res)
+          console.log(location)
+         setForecastData(res)
+         // console.log(Weatherdata.weather[0].main)
+          console.log(forecastData)
+          
+      }).catch(error => {
+        console.log(error)
+      })
+  }
 
     
    
@@ -99,7 +110,11 @@ const MainScreen = ({navigation}) => {
                   setCondition('clear/day')
                 } else if(Weatherdata.weather[0].main === 'Rain' || Weatherdata.weather[0].main === 'Drizzle') {
                   setCondition('rainy/day')
-                } 
+                }  else if (Weatherdata.weather[0].main === 'Thunderstorm'){
+                  setCondition('thunderstorm')
+                } else if (Weatherdata.weather[0].main === 'Dust'){
+                  setCondition('foggy')
+                }
            }
 
            //Night Condition
@@ -121,7 +136,11 @@ const MainScreen = ({navigation}) => {
               setCondition('clear/night')
             }else if (Weatherdata.weather[0].main === 'Rain' || Weatherdata.weather[0].main === 'Drizzle'){
               setCondition('rainy/night')
-            } 
+            } else if (Weatherdata.weather[0].main === 'Thunderstorm'){
+              setCondition('thunderstorm')
+            } else if (Weatherdata.weather[0].main === 'Dust'){
+              setCondition('foggy')
+            }
          } 
         }
   
@@ -155,7 +174,7 @@ const MainScreen = ({navigation}) => {
        } else if (condition === 'rainy/night') {
         return (
           <Video 
-     
+        
           source={ require('../assets/rainingnight1.mp4')}
           resizeMode={ResizeMode.COVER}
           
@@ -175,7 +194,54 @@ const MainScreen = ({navigation}) => {
          
           /> 
         )
-       } else {
+       } else if(condition === 'thunderstorm') {
+
+        return(
+        <Video 
+     
+        source={require('../assets/thunderstorm.mp4')}
+        resizeMode={ResizeMode.COVER}
+        
+        
+         style={{ 
+          position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+      }}
+        isLooping
+        shouldPlay
+        useNativeControls={false}
+        isMuted
+        
+       
+        /> 
+        )
+       } else if (condition === 'foggy') {
+        return (
+          <Video 
+     
+          source={ require('../assets/foggy.mp4')}
+          resizeMode={ResizeMode.COVER}
+          
+          
+           style={{ 
+            position: 'absolute',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+        }}
+          isLooping
+          shouldPlay
+          useNativeControls={false}
+          isMuted
+          
+         
+          /> 
+        )
+      } else {
         return
        }
    }
@@ -207,6 +273,12 @@ const MainScreen = ({navigation}) => {
         }
     }
 
+
+    render++
+    console.log('MainScreen.js rendered: ' + render + 'times')
+
+
+    //return
 
   return (
     !loading ? 
@@ -244,7 +316,7 @@ const MainScreen = ({navigation}) => {
                 //  Weatherdata.weather[0].main === 'Clear' && {backgroundColor: themes.sunny},
                 //  Weatherdata.weather[0].main === 'Rain' && {backgroundColor: themes.rain}
                 ]}>
-                <Text style={{color: '#faf9f6', fontFamily:'Domine-Bold', fontSize: 19}}>{Weatherdata.weather[0].main === 'Clouds' ? 'Cloudy': Weatherdata.weather[0].main === 'Clear' ? 'Clear' : 'Rainy'}</Text>
+                <Text style={[{color: '#faf9f6', fontFamily:'Domine-Bold', fontSize: 19}, condition === 'foggy' && {color: 'black'}]}>{Weatherdata.weather[0].main === 'Clouds' ? 'Cloudy': Weatherdata.weather[0].main === 'Clear' ? 'Clear' : Weatherdata.weather[0].main === 'Thunderstorm' ?  'Thunderstorm' :condition === 'foggy' ? 'Foggy' : 'Rainy'}</Text>
             </View>
             <View style={[
                 styles.temperature,

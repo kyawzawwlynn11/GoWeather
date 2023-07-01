@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Dimensions,FlatList } from 'react-native'
-import React, { useEffect } from 'react'
+import { StyleSheet, Text, View, Dimensions,FlatList, Animated } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import ForcastScreenHeader from '../components/ForcastScreenHeader';
 
 import {
@@ -12,9 +12,21 @@ import {
   } from "react-native-chart-kit";
 import moment from 'moment';
 import ForecastContainer from '../components/ForecastContainer';
+import Paginator from '../components/Paginator';
+import Loading from '../components/Loading';
 
 
 const ForecastScreen = ({navigation, route}) => {
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const slidesRef = useRef(null)
+
+  const viewableItemsChanged = useRef(({viewableItems}) => {
+ setCurrentIndex(viewableItems[0].index)
+  }).current;
+
+  const viewconfig = useRef({ viewAreaCoveragePercentThreshold: 50}).current;
 
   const goBackHandler = () => {
     navigation.goBack()
@@ -43,7 +55,7 @@ const ForecastScreen = ({navigation, route}) => {
 ]
 
 
-
+console.log(forecastData)
 // if(moment.unix(forecastData.list[0].dt).format('H') === "21"){
 //   console.log(moment.unix(forecastData.list[0].dt).format('dddd H'))
 //   //console.log(moment.unix(date).format('dddd H'))
@@ -80,7 +92,7 @@ for(let i = 0; i < forecastData.list.length ; i++) {
 
  for(let i = 0; i< thirdDayForecastData.length; i++) {
   console.log(moment.unix(thirdDayForecastData[i].dt).format("D:M:yy H"))
- }
+}
 
  for(let i = 0; i < fourthDayForecastData.length; i++){
   console.log(moment.unix(fourthDayForecastData[i].dt).format("D:M:yy H"))
@@ -98,17 +110,26 @@ for(let i = 0; i < forecastData.list.length ; i++) {
  ]
  
 
+
+ 
+
   return (
     <View style={styles.container}>
      <ForcastScreenHeader pressHandler={goBackHandler}/>
-
+ <View style={{flex:0.9, backgroundColor:'red'}}>
     <FlatList
     
     horizontal
-    showHorizontalScrollIndicator={false}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
+    viewabilityConfig={viewconfig}
     data={contents}
+    scrollEventThrottle={32}
     pagingEnabled
     bounces={false}
+    onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
+      useNativeDriver: false
+    })}
     
     renderItem={({item}) => {
       return(
@@ -116,9 +137,10 @@ for(let i = 0; i < forecastData.list.length ; i++) {
       )
     }}
     />
+    </View>
   
    
-     
+     <Paginator data={contents} scrollX={scrollX}/>
 
     </View>
   )
@@ -129,7 +151,7 @@ export default ForecastScreen
 const styles = StyleSheet.create({
    container:{
     flex: 1,
-    backgroundColor: '#F9F3F3'
+   // backgroundColor: 'red'
        
    },
   

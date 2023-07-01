@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button,Dimensions,ScrollView } from 'react-native'
 import React from 'react'
 import { useContext, useRef, useState } from 'react'
-import { Context } from '../App'
+
 import { Video, ResizeMode } from 'expo-av'
 import {
   LineChart,
@@ -19,7 +19,7 @@ import { useFonts } from 'expo-font'
 const About = ({navigation}) => {
 
 
-  const data = useContext(Context)
+
   const video = useRef(null)
   const [status, setStatus] = React.useState({});
 

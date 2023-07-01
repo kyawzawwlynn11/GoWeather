@@ -1,6 +1,6 @@
 import { Button, Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
-import { LocationContext } from '../constants/LocationContext'
+import { LocationContext } from '../constants/Context'
 import { FlatList, ScrollView, TextInput } from 'react-native-gesture-handler';
 import ChangeLocationHeader from '../components/ChangeLocationHeader';
 import CustomButton from '../components/CustomButton';
@@ -10,9 +10,7 @@ import { useFonts } from 'expo-font';
 
 const ChangeLocation = ({navigation}) => {
 
-   const [fontsLoaded] = useFonts ({
-    'Ledger': require('../assets/fonts/Ledger-Regular.ttf')
-   })
+  
    //Registering the highest level component state and its state setter function using useContext hook
    const {location,pressHandler} = useContext(LocationContext);
 
@@ -30,9 +28,7 @@ const ChangeLocation = ({navigation}) => {
 
    }
 
-   if(!fontsLoaded){
-    return null
-   }
+  
   return (
     <View style={styles.container}>
       <ChangeLocationHeader iconPresshandler={iconPresshandler}/>
@@ -83,27 +79,27 @@ const styles = StyleSheet.create({
     },
     firstSection:{
      flex: 0.15,
-    // backgroundColor:'red',
+    //backgroundColor:'red',
      width: '100%',
      alignItems:'center',
      justifyContent:'center',
     },
     wrapper:{
       width: Dimensions.get('window').width -30,
-       //backgroundColor:'green',
-      height: '70%',
+      // backgroundColor:'green',
+      height: '75%',
       gap:15
     },
     searchContainer:{
-    // backgroundColor:'red',
+    //backgroundColor:'red',
       width:'100%',
-      height:'40%',
+      height:'30%',
       flexDirection:'row',
       justifyContent:'space-between'
     },
     secondSection: {
-      flex:0.75,
-      //backgroundColor:'green',
+      flex:0.65,
+     // backgroundColor:'green',
       width:'100%',
       alignItems:'center'
     },
@@ -115,14 +111,15 @@ const styles = StyleSheet.create({
     contentContainer: {
       flex: 0.93,
       width: Dimensions.get("window").width -30,
-     // backgroundColor: 'red',
+     //backgroundColor: 'red',
       flexDirection:'row',
       flexWrap:'wrap',
       justifyContent: 'space-around',
+      overflow:'hidden'
     },
     thirdSection:{
-      flex:0.1,
-      //backgroundColor:'red',
+      flex:0.145,
+      //backgroundColor:'blue',
       width:'100%',
       justifyContent:'center',
       alignItems:'center'

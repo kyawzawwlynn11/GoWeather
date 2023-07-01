@@ -10,7 +10,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Entypo } from '@expo/vector-icons';
 import { themes } from '../constants/colors';
 import { Dimensions } from 'react-native';
-import { Context } from './DrawerStacks';
+import { Context } from '../constants/Context';
 import { Video, ResizeMode } from 'expo-av';
 import moment from 'moment';
 
@@ -29,7 +29,7 @@ const data = useContext(Context);
 contentsList = [
   {title:"Home", icon: <Ionicons name="home-outline" size={23} color="#faf9f6" />,key : 1},
   {title:"Change Location", icon: <Ionicons name="location-outline" size={23} color="#faf9f6" />,key : 2},
-  {title:"Share your friends", icon: <Entypo name="share" size={23} color="#faf9f6" />,key : 3},
+  
   {title:"Feedback", icon: <Octicons name="report" size={23} color="#faf9f6" />,key : 4},
   {title:"About", icon: <AntDesign name="questioncircleo" size={23} color="#faf9f6" />,key : 5}
   
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     
      height: height*0.3,
      flexDirection:'row',
-     borderBottomWidth:0.5
+    
      
   },
   imageContainer:{

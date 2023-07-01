@@ -213,12 +213,14 @@ const getIcons = (arr) => {
 
    <FlatList 
    horizontal
+   showsVerticalScrollIndicator={false}
+   showsHorizontalScrollIndicator={false}
      data={getIcons(data)}
      renderItem={({item}) => {
       return (
         <View style={styles.contents}>
           
-          <Image style={{width: 100, height: 90}} source={{uri : `https://openweathermap.org/img/wn/${item.icon}.png`}}/>
+          <Image style={{width: 90, height: 90}} source={{uri : `https://openweathermap.org/img/wn/${item.icon}.png`}}/>
           <Text style={{fontSize:13, fontFamily: 'Domine' }}>{item.title}</Text>
           <Text style={{fontSize: 15, color: '#393E46' , fontFamily: 'Domine-Bold'}}>{item.date}</Text>
          
@@ -237,7 +239,7 @@ export default ForecastContainer
 const styles = StyleSheet.create({
     container:{
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height*0.9,
+        height: '100%',
        
        
         backgroundColor: '#F9F3F3',
